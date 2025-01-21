@@ -57,6 +57,44 @@ public class Main {
                         System.out.println("Invalid category.");
                     }
                     break;
+                case 2:
+                    System.out.println("Your Cart:");
+                    for (String item : cart) {
+                        System.out.println(item);
+                    }
+                    break;
+                case 3:
+                    double total = 0;
+                    System.out.println("Invoice:");
+                    for (String item : cart) {
+                        String[] parts = item.split(" - \\$");
+                        total += Double.parseDouble(parts[1]);
+                        System.out.println(item);
+                    }
+                    System.out.println("Total: $" + total);
+                    System.out.println("Thank you for your order!");
+                    cart.clear(); // Clear cart after checkout
+                    break;
+                case 4:
+                    isAdmin = !isAdmin; // admin mode
+                    if (isAdmin) {
+                        System.out.println("Admin View:");
+                        for (int i = 0; i < categories.length; i++) {
+                            System.out.println(categories[i] + ":");
+                            for (int j = 0; j < products[i].length; j++) {
+                                System.out.println(products[i][j] + " (Available: " + stock[i][j] + ")");
+                            }
+                        }
+                    } else {
+                        System.out.println("Exited Admin View.");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Thank you for shopping!");
+                    scanner.close();
+                    return;
+                default:
+                    System.out.println("Invalid option. Please try again.");
             }
         }
     }
