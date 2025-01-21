@@ -29,6 +29,35 @@ public class Main {
             System.out.println("5. Exit");
             System.out.print("Select an option: ");
             int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Available Categories:");
+                    for (int i = 0; i < categories.length; i++) {
+                        System.out.println(i + ". " + categories[i]);
+                    }
+                    System.out.print("Select a category: ");
+                    int categoryIndex = scanner.nextInt();
+                    if (categoryIndex >= 0 && categoryIndex < categories.length) {
+                        System.out.println("Products in " + categories[categoryIndex] + ":");
+                        for (int i = 0; i < products[categoryIndex].length; i++) {
+                            String availability = stock[categoryIndex][i] > 0 ? "In Stock" : "Out of Stock";
+                            System.out.println(i + ". " + products[categoryIndex][i] + " (" + availability + ")");
+                        }
+                        System.out.print("Select a product to add to cart: ");
+                        int productIndex = scanner.nextInt();
+                        if (productIndex >= 0 && productIndex < products[categoryIndex].length && stock[categoryIndex][productIndex] > 0) {
+                            cart.add(products[categoryIndex][productIndex]);
+                            stock[categoryIndex][productIndex]--;
+                            System.out.println(products[categoryIndex][productIndex] + " added to cart.");
+                        } else {
+                            System.out.println("Invalid selection or out of stock.");
+                        }
+                    } else {
+                        System.out.println("Invalid category.");
+                    }
+                    break;
+            }
         }
     }
 }
